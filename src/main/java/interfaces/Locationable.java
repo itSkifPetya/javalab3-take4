@@ -5,6 +5,6 @@ import records.UniverseBase;
 
 public interface Locationable {
     Place location = UniverseBase.getBaseLocation();
-    Place getLocation();
+    String getLocation();
     void setLocation(Place location);
 }

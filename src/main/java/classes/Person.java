@@ -5,10 +5,11 @@ import enums.Condition;
 import exceptions.NotLocationObjectException;
 import interfaces.Location;
 import interfaces.Locationable;
+import interfaces.Moveable;
 import interfaces.Reasonable;
 import records.Highlighter;
 
-public class Person extends Obj implements Reasonable, Locationable {
+public class Person extends Obj implements Reasonable, Locationable, Moveable {
     private final String name;
     private final float intellect;
     private Place location;
@@ -61,8 +62,8 @@ public class Person extends Obj implements Reasonable, Locationable {
     }
 
     @Override
-    public Place getLocation() {
-        return this.location;
+    public String getLocation() {
+        return this.location.getName();
     }
 
     @Override
@@ -83,5 +84,10 @@ public class Person extends Obj implements Reasonable, Locationable {
             throw new NotLocationObjectException(Highlighter.objToStr(obj) + "isn't instance of Location");
         }
 
+    }
+
+    @Override
+    public String moved(Place place) {
+        return Highlighter.person(this) + " отправился в " + Highlighter.place(place);
     }
 }

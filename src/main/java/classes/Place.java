@@ -10,12 +10,12 @@ import java.util.ArrayList;
 
 public class Place extends Obj implements Location {
     private final String name;
-    private ArrayList<Obj> stayings;
+    protected ArrayList<Obj> stayings = new ArrayList<>(1);
 
     public Place(String name) {
         super(name);
         this.name = name;
-        this.stayings = new ArrayList<>(1);
+//        this.stayings = new ArrayList<>(1);
     }
 
     public String getName() {
@@ -30,7 +30,9 @@ public class Place extends Obj implements Location {
     @Override
     public void setStayings(ArrayList<Obj> stayings) throws NotLocationableObjectException {
         for (Obj x: stayings) {
-            if (!(x instanceof Locationable)) {
+            if (x instanceof Locationable) {
+                ((Locationable) x).setLocation(this);
+            } else {
                 throw new NotLocationableObjectException(Highlighter.objToStr(x) + "isn't instance of Locationable");
             }
         }

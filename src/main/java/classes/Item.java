@@ -7,12 +7,12 @@ import interfaces.Locationable;
 public class Item extends Obj implements Belongable, Locationable {
     private final String name;
     private Person owner;
-    private Place location;
+    private String location;
 
     public Item(String name) {
         super(name);
         this.name = name;
-        owner = Belongable.owner;
+        owner = new Person("Nobody");
         location = owner.getLocation();
     }
 
@@ -37,13 +37,13 @@ public class Item extends Obj implements Belongable, Locationable {
     }
 
     @Override
-    public Place getLocation() {
+    public String getLocation() {
         return this.location;
     }
 
     @Override
     public void setLocation(Place location) {
-        this.location = location;
+        this.location = location.getName();
     }
 
 }
