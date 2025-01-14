@@ -6,8 +6,8 @@ import enums.Condition;
 
 public record UniverseBase() {
     static Place baseLocation = new Place("World");
-    static Person baseOwner = new Person("Nobody");
     static Condition baseCondition = Condition.INACTIVE;
+    static Person baseOwner = new Person("Nobody");
     static String[] heroNames = new String[]{"Скуперфильд", "Гунька", "Знайка", "Винтик", "Незнайка", "Тюбик"};
     static String[] heroItems = new String[]{"Чемодан", "Микрофон", "Карандаш", "Компас", "Цилиндр", "Конструктор"};
     static String[] thoughts = new String[]{};

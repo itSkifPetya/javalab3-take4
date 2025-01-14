@@ -5,10 +5,11 @@ import enums.Condition;
 import exceptions.NotLocationObjectException;
 import interfaces.Location;
 import interfaces.Locationable;
+import interfaces.Moveable;
 import interfaces.Reasonable;
 import records.Highlighter;
 
-public class Person extends Obj implements Reasonable, Locationable {
+public class Person extends Obj implements Reasonable, Locationable, Moveable {
     private final String name;
     private final float intellect;
     private Place location;
@@ -61,8 +62,8 @@ public class Person extends Obj implements Reasonable, Locationable {
     }
 
     @Override
-    public Place getLocation() {
-        return this.location;
+    public String getLocation() {
+        return this.location.getName();
     }
 
     @Override
@@ -70,10 +71,6 @@ public class Person extends Obj implements Reasonable, Locationable {
         this.location = location;
     }
 
-    @Override
-    public String toString() {
-        return super.toString() + "[luck=" + this.intellect + ", location=" + this.location + ", condition=" + this.condition +"]";
-    }
 
     @Override
     public String realization(Obj obj) throws NotLocationObjectException {
@@ -82,6 +79,29 @@ public class Person extends Obj implements Reasonable, Locationable {
         } else {
             throw new NotLocationObjectException(Highlighter.objToStr(obj) + "isn't instance of Location");
         }
+    }
 
+    @Override
+    public String moved(Place place) {
+        return Highlighter.person(this) + " отправился в " + Highlighter.place(place);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "[intellect=" + this.intellect + ", location=" + this.location + ", condition=" + this.condition +"]";
+    }
+
+    @Override
+    public boolean equals(Object otherObject) {
+        if (super.equals(otherObject)) {
+            return this.intellect == ((Person) otherObject).intellect &&
+                    this.location.equals(((Person) otherObject).location) &&
+                    this.condition == ((Person) otherObject).condition;
+        } return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode() + (int) intellect + condition.hashCode();
     }
 }
