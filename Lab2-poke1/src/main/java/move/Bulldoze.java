@@ -3,12 +3,11 @@ package move;
 
 import ru.ifmo.se.pokemon.*;
 
-public class Bulldoze extends PhysicalMove {
+public final class Bulldoze extends PhysicalMove {
 
-    public Bulldoze() {
-        super(Type.GROUND, 60., 100.);
+    public Bulldoze(Type type, double pow, double acc) {
+        super(type, pow, acc);
     }
-
 
     @Override
     protected void applyOppEffects(Pokemon p) {
@@ -18,6 +17,7 @@ public class Bulldoze extends PhysicalMove {
 
     @Override
     protected String describe() {
-        return "BULDOOOOOZE!!!";
+        String[] pieces = this.getClass().toString().split("\\.");
+        return "does " + pieces[pieces.length-1];
     }
 }
