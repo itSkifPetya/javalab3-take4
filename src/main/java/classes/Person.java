@@ -71,10 +71,6 @@ public class Person extends Obj implements Reasonable, Locationable, Moveable {
         this.location = location;
     }
 
-    @Override
-    public String toString() {
-        return super.toString() + "[luck=" + this.intellect + ", location=" + this.location + ", condition=" + this.condition +"]";
-    }
 
     @Override
     public String realization(Obj obj) throws NotLocationObjectException {
@@ -83,11 +79,29 @@ public class Person extends Obj implements Reasonable, Locationable, Moveable {
         } else {
             throw new NotLocationObjectException(Highlighter.objToStr(obj) + "isn't instance of Location");
         }
-
     }
 
     @Override
     public String moved(Place place) {
         return Highlighter.person(this) + " отправился в " + Highlighter.place(place);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "[intellect=" + this.intellect + ", location=" + this.location + ", condition=" + this.condition +"]";
+    }
+
+    @Override
+    public boolean equals(Object otherObject) {
+        if (super.equals(otherObject)) {
+            return this.intellect == ((Person) otherObject).intellect &&
+                    this.location.equals(((Person) otherObject).location) &&
+                    this.condition == ((Person) otherObject).condition;
+        } return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode() + (int) intellect + condition.hashCode();
     }
 }

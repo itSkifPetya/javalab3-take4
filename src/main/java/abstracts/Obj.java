@@ -1,5 +1,7 @@
 package abstracts;
 
+import java.util.Objects;
+
 abstract public class Obj {
     private final String name;
 
@@ -19,6 +21,15 @@ abstract public class Obj {
         if (otherObject == null) return false;
         if (getClass() != otherObject.getClass()) return false;
         return name.equals(((Obj) otherObject).name);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        for (int i = 0; i < getClass().getName().length(); i++) {
+            hash = 31 * hash + getClass().getName().charAt(i);
+        }
+        return hash + Objects.hashCode(name) ;
     }
 
     abstract public String getName();

@@ -5,7 +5,6 @@ import enums.Condition;
 import records.Highlighter;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 public class Sys {
     public static void setPersonCondition(Person person, Condition condition) {
@@ -27,4 +26,5 @@ public class Sys {
             return false;
         }
     }
+
 }

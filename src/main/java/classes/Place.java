@@ -58,4 +58,24 @@ public class Place extends Obj implements Location {
     public String toString() {
         return super.toString() + "[stayings=" + stayings + "]";
     }
+
+    @Override
+    public boolean equals(Object otherObject) {
+        if (super.equals(otherObject)) {
+            return this.name.equals(((Place) otherObject).name) && this.stayings.equals(((Place) otherObject).stayings);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        for (int i = 0; i < name.length(); i++) {
+            hash = 31 * hash + name.charAt(i);
+        }
+        for (Obj x : stayings) {
+            hash += x.hashCode();
+        }
+        return super.hashCode() + hash;
+    }
 }
